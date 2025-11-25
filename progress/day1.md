@@ -4,6 +4,11 @@
 - Created GitHub repository and project structure
 - Set up folder organization for screenshots, progress, configs, and diagrams
 - Prepared README.md with project overview and skill sections
+- Created Azure Free Account
+- Completed initial Azure Portal setup and verified account access
+
+## Screenshots Added
+- Azure Portal dashboard
 
 ## Lessons Learned
 - GitHub requires at least one file inside a folder to create it
