@@ -1,4 +1,4 @@
-# azure-ad-mfa-lab
+
 # Azure AD MFA Lab
 
 Hands-on Azure AD, MFA, Conditional Access, and VM security configuration lab.
