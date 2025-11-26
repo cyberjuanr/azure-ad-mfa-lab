@@ -1,88 +1,121 @@
-# Day 2 Progress – Azure AD MFA Lab
+# Day 2 Progress – Azure AD MFA + Azure VM Security Lab
 
 ## Objectives for Today
 - Verify tenant-wide MFA enforcement using Security Defaults
-- Create a Conditional Access policy to require MFA
-- Begin secure VM deployment planning
-- Prepare for Network Security Group (NSG) configuration
+- Review authentication methods and Conditional Access limitations
+- Deploy an Azure Linux VM for security testing
+- Configure Network Security Group (NSG) security
+- Establish secure remote connectivity using SSH keys
+- Validate Zero Trust access controls and cost management
 
 ---
 
 ## Tasks Completed
 
 ### 1. MFA Enforcement via Security Defaults
-- Verified that Microsoft Security Defaults are enabled at the tenant level.
-- Confirmed that MFA is enforced for all users automatically.
-- Security Defaults also block legacy authentication methods.
+- Verified Microsoft Security Defaults are enabled tenant-wide.
+- Confirmed that Security Defaults enforce MFA for all users automatically.
+- Noted that Security Defaults block legacy authentication methods.
 
 ### 2. Authentication Method Review
-- Reviewed Microsoft Authenticator authentication method settings.
-- Confirmed that advanced MFA registration enforcement is restricted due to tenant licensing (no P1/P2).
-- Validated that Conditional Access will be used for advanced access controls instead.
-  
+- Checked Microsoft Authenticator configuration.
+- Confirmed advanced MFA settings were unavailable due to licensing limits.
+- Determined Conditional Access will be used later (requires P1 or P2).
+
 ### 3. Conditional Access Attempt
-- Navigated to Microsoft Entra ID > Security > Conditional Access.
-- Confirmed that custom Conditional Access policy creation is restricted due to lack of Entra ID Premium (P1/P2) licensing.
-- Validated that Security Defaults are the active enforcement mechanism for tenant-wide MFA.
+- Navigated to Microsoft Entra ID → Security → Conditional Access.
+- Verified that the tenant cannot create custom Conditional Access policies without P1/P2 licensing.
+- Confirmed that Security Defaults remain the active MFA enforcement mechanism.
 
 ### 4. Resource Group Setup
-- Created a dedicated resource group named AzureLabRG.
+- Created AzureLabRG resource group.
 - Assigned it to the Free Trial subscription.
-- Selected Central US as the region for lab consistency and availability.
+- Selected Central US for consistency and availability.
 
-### 5. Azure VM Deployment & Cost Control 
-## Tasks Completed
-- Resolved VM quota limitation by selecting available VM size
-- Deployed Ubuntu Linux virtual machine successfully
-- Verified VM provisioning and agent status
-- Configured Network Security Group during deployment
-- Assigned public and private IP addresses to VM
-- Verified VM was running and reachable
-- Stopped (deallocated) VM to prevent unnecessary charges
+---
 
-## VM Configuration Details
-- VM Name: AzureLabVM
-- OS: Ubuntu Server 22.04 LTS
-- VM Size: Standard_D2as_v4 (2 vCPU, 8 GiB RAM)
-- Resource Group: AzureLabRG
-- Region: West US 2
-- Disk Type: Standard SSD
-- Networking: Public + Private IP assigned
-- NSG: AzureLabVM-NSG
+## 5. Azure VM Deployment & Cost Control
 
-## Cost & Billing Awareness
-- VM cost while running: ~$0.096/hour
-- Confirmed that charges stop only when VM is in:
-  "Stopped (deallocated)" state
-- Verified Azure credits will be used instead of personal billing
-- Learned to stop VM immediately when not in use
+### VM Deployment
+- Resolved VM quota issues by selecting an available VM size in West US 2.
+- Successfully deployed an Ubuntu 22.04 VM.
+- Verified VM provisioning, OS type, and Azure guest agent status.
+- Created NSG during setup.
+- Confirmed assignment of public + private IP addresses.
+- Confirmed VM reached “Running” state.
+
+### Cost Awareness
+- VM Cost: ~$0.096/hour while running.
+- Charges only stop when VM is **Stopped (deallocated)**.
+- Immediately deallocated VM after provisioning to protect credits.
+
+---
+
+## 6. Updated NSG (Network Security Group)
+- Opened Network Settings → Network security group (AzureLabVM-NSG).
+- Edited inbound SSH rule (Priority 1000).
+- Changed **Source = My IP Address** instead of “Any.”
+- Applied least-privilege access control.
+- Verified all other inbound rules remained secure:
+  - AllowVnetInBound
+  - AllowAzureLoadBalancerInBound
+  - DenyAllInBound
+
+---
+
+## 7. Configured SSH Key Authentication
+- Downloaded `AzureLabKey.pem` during VM creation.
+- Moved the key into the secure `.ssh` directory:
+  ```bash
+  mv AzureLabKey.pem ~/.ssh/
+  chmod 400 ~/.ssh/AzureLabKey.pem
+  ```
+- Connected to VM securely with SSH:
+  ```bash
+  ssh -i ~/.ssh/AzureLabKey.pem azureadmin@<VM_PUBLIC_IP>
+  ```
+
+---
+
+## 8. Validated Successful SSH Login
+- Confirmed successful login with:
+  - Ubuntu welcome banner
+  - System load, uptime, update status
+  - Private IP (172.16.x.x)
+  - Logged-in username (`azureadmin`)
+- Verified NSG rule correctly restricted SSH access to only my IP.
+
 ---
 
 ## Screenshots Added
-- Security Defaults enabled page (tenant-wide MFA enforcement)
-- Microsoft Authenticator settings page
-- Resource Group Creation Confirmation
+- security-defaults-enabled.png
+- auth-methods-page.png
+- resource-group-created.png
 - vm-deployment-success.png
-
+- secure-ssh-connection.png
 
 ---
 
 ## Lessons Learned
-- Security Defaults provide baseline MFA and identity protection without additional licensing.
-- Advanced MFA controls (such as forced registration) require Entra ID Premium licensing.
-- Conditional Access policy creation requires Entra ID Premium P1 or P2.
-- Free Trial tenants rely on Security Defaults for baseline Zero Trust enforcement.
-- Licensing directly impacts available cloud security control planes.
-- Free-tier VM sizes may be unavailable due to regional quota limits
-- Alternative VM sizes can be used safely with credits
-- VM costs accrue as long as the VM is running
-- Stopping is not enough — VM must be "deallocated"
-- NSGs control traffic at the network level
 
+### Identity & MFA
+- Security Defaults provide strong MFA enforcement without P1/P2 licensing.
+- Conditional Access cannot be configured without premium licensing.
+- Authentication method options vary by licensing tier.
+
+### VM & Networking
+- Regional VM size availability varies due to quota limits.
+- Alternative VM sizes can be used safely within free credits.
+- NSGs enforce network segmentation and least privilege.
+- SSH should always be restricted to a trusted IP.
+
+### Cost Management
+- VM billing continues while VM is running.
+- Stopping the VM is not enough—must be **Stopped (deallocated)**.
+- Always shut down lab VMs immediately when finished.
 
 ---
 
 ## Planned Next Steps
-- Apply Network Security Group (NSG) rules to restrict inbound access
-- Validate secure remote connectivity (RDP or SSH)
+- Lab Completed ☑️
 
