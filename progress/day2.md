@@ -19,6 +19,11 @@
 - Reviewed Microsoft Authenticator authentication method settings.
 - Confirmed that advanced MFA registration enforcement is restricted due to tenant licensing (no P1/P2).
 - Validated that Conditional Access will be used for advanced access controls instead.
+  
+### Conditional Access Attempt
+- Navigated to Microsoft Entra ID > Security > Conditional Access.
+- Confirmed that custom Conditional Access policy creation is restricted due to lack of Entra ID Premium (P1/P2) licensing.
+- Validated that Security Defaults are the active enforcement mechanism for tenant-wide MFA.
 
 ---
 
@@ -31,8 +36,10 @@
 ## Lessons Learned
 - Security Defaults provide baseline MFA and identity protection without additional licensing.
 - Advanced MFA controls (such as forced registration) require Entra ID Premium licensing.
-- Conditional Access is the correct control plane for enforcing MFA in Free Trial tenants.
-- Identity security can be enforced at both the **authentication layer** and the **policy layer**.
+- Conditional Access policy creation requires Entra ID Premium P1 or P2.
+- Free Trial tenants rely on Security Defaults for baseline Zero Trust enforcement.
+- Licensing directly impacts available cloud security control planes.
+
 
 ---
 
