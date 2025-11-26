@@ -27,6 +27,11 @@
 
 
 ## Next Steps
-- Create Azure free account
-- Begin Azure AD user and group setup
-- Take screenshots and upload to /screenshots
+- MFA Setup
+
+- Conditional Access Policy
+
+- VM Deployment
+
+- NSG Security Rules
+  
