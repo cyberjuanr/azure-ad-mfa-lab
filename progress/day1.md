@@ -6,6 +6,8 @@
 - Prepared README.md with project overview and skill sections
 - Created Azure Free Account
 - Completed initial Azure Portal setup and verified account access
+- Created three test users: Elliot, Cassian_Andor, Chewie, Juan Antonio
+
 
 ## Screenshots Added
 - Azure Portal dashboard
