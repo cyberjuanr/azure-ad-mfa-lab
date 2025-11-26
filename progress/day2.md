@@ -20,7 +20,7 @@
 - Confirmed that advanced MFA registration enforcement is restricted due to tenant licensing (no P1/P2).
 - Validated that Conditional Access will be used for advanced access controls instead.
   
-### Conditional Access Attempt
+### 3. Conditional Access Attempt
 - Navigated to Microsoft Entra ID > Security > Conditional Access.
 - Confirmed that custom Conditional Access policy creation is restricted due to lack of Entra ID Premium (P1/P2) licensing.
 - Validated that Security Defaults are the active enforcement mechanism for tenant-wide MFA.
@@ -44,7 +44,6 @@
 ---
 
 ## Planned Next Steps
-- Create a Conditional Access policy requiring MFA for all users
 - Deploy a secure Azure Virtual Machine using Free Tier resources
 - Apply Network Security Group (NSG) rules to restrict inbound access
 - Validate secure remote connectivity (RDP or SSH)
