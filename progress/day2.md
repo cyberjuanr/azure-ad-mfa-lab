@@ -25,11 +25,17 @@
 - Confirmed that custom Conditional Access policy creation is restricted due to lack of Entra ID Premium (P1/P2) licensing.
 - Validated that Security Defaults are the active enforcement mechanism for tenant-wide MFA.
 
+### 4. Resource Group Setup
+- Created a dedicated resource group named AzureLabRG.
+- Assigned it to the Free Trial subscription.
+- Selected Central US as the region for lab consistency and availability.
+
 ---
 
 ## Screenshots Added
 - Security Defaults enabled page (tenant-wide MFA enforcement)
 - Microsoft Authenticator settings page
+- Resource Group Creation Confirmation
 
 ---
 
